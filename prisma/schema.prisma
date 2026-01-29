@@ -1,0 +1,136 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  image         String?
+  emailVerified DateTime?
+  accounts      Account[]
+  sessions      Session[]
+  hostedRooms   Room[]    @relation("RoomHost")
+  players       Player[]
+  createdAt     DateTime  @default(now())
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  @@unique([identifier, token])
+}
+
+enum RoomStatus {
+  WAITING
+  PLAYING
+  FINISHED
+}
+
+model Room {
+  id                  String     @id @default(cuid())
+  code                String     @unique
+  status              RoomStatus @default(WAITING)
+  hostId              String
+  host                User       @relation("RoomHost", fields: [hostId], references: [id])
+  players             Player[]
+  rounds              GameRound[]
+  currentTurnIndex    Int?       // 0-based index in turn order during PLAYING
+  // Tiebreak fields
+  tiebreakPlayerIds   String[]   @default([]) // Player IDs in tiebreak
+  tiebreakDefenseIdx  Int?       // Current defender index in tiebreakPlayerIds
+  tiebreakStartedAt   DateTime?  // When defense phase started
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
+}
+
+enum PlayerRole {
+  CIVILIAN
+  IMPOSTOR
+}
+
+model Player {
+  id        String      @id @default(cuid())
+  userId    String
+  roomId    String
+  role      PlayerRole  @default(CIVILIAN)
+  isAlive   Boolean     @default(true)
+  score     Int         @default(0)
+  turnOrder Int?
+  user      User        @relation(fields: [userId], references: [id])
+  room      Room        @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  votes     Vote[]      @relation("VoteCaster")
+  votedBy   Vote[]      @relation("VoteTarget")
+  @@unique([userId, roomId])
+}
+
+model GameRound {
+  id                      String   @id @default(cuid())
+  roomId                  String
+  room                    Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  wordId                  String
+  word                    Word     @relation(fields: [wordId], references: [id])
+  roundNum                Int
+  votes                   Vote[]
+  impostorGuess           String?  // What the impostor guessed
+  impostorGuessedCorrect  Boolean? // Did they guess correctly?
+  createdAt               DateTime @default(now())
+}
+
+model Category {
+  id    String @id @default(cuid())
+  name  String @unique
+  words Word[]
+}
+
+model Word {
+  id         String      @id @default(cuid())
+  text       String
+  categoryId String
+  category   Category    @relation(fields: [categoryId], references: [id])
+  rounds     GameRound[]
+  @@unique([text, categoryId])
+}
+
+model Vote {
+  id        String    @id @default(cuid())
+  roundId   String
+  round     GameRound @relation(fields: [roundId], references: [id], onDelete: Cascade)
+  casterId  String
+  caster    Player    @relation("VoteCaster", fields: [casterId], references: [id])
+  targetId  String
+  target    Player    @relation("VoteTarget", fields: [targetId], references: [id])
+  createdAt DateTime  @default(now())
+  @@unique([roundId, casterId])
+}

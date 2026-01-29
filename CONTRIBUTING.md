@@ -1,137 +1,136 @@
-# Guía de Contribución
+# Contributing Guide
 
-¡Gracias por tu interés en contribuir a Impostor! Este documento te guiará a través del proceso.
+Thank you for your interest in contributing to Impostor! This document will guide you through the process.
 
-## Código de Conducta
+## Code of Conduct
 
-Por favor, sé respetuoso y constructivo en todas tus interacciones. Queremos mantener una comunidad acogedora para todos.
+Please be respectful and constructive in all your interactions. We want to maintain a welcoming community for everyone.
 
-## Cómo Contribuir
+## How to Contribute
 
-### Reportar Bugs
+### Reporting Bugs
 
-Si encuentras un bug:
+If you find a bug:
 
-1. Busca en los [issues existentes](../../issues) para ver si ya fue reportado
-2. Si no existe, [abre un nuevo issue](../../issues/new) incluyendo:
-   - Título descriptivo
-   - Pasos para reproducir el bug
-   - Comportamiento esperado vs actual
-   - Tu entorno (navegador, sistema operativo)
-   - Screenshots o videos si aplica
+1. Search the [existing issues](../../issues) to see if it has already been reported
+2. If not, [open a new issue](../../issues/new) including:
+   - Descriptive title
+   - Steps to reproduce the bug
+   - Expected vs actual behavior
+   - Your environment (browser, operating system)
+   - Screenshots or videos if applicable
 
-### Sugerir Features
+### Suggesting Features
 
-¿Tienes una idea para mejorar el juego?
+Have an idea to improve the game?
 
-1. Revisa los [issues existentes](../../issues) por si ya fue sugerido
-2. [Abre un nuevo issue](../../issues/new) describiendo:
-   - El problema que resuelve
-   - Cómo funcionaría
-   - Mockups o diagramas si los tienes
+1. Check the [existing issues](../../issues) in case it has already been suggested
+2. [Open a new issue](../../issues/new) describing:
+   - The problem it solves
+   - How it would work
+   - Mockups or diagrams if you have them
 
-### Contribuir Código
+### Contributing Code
 
-1. **Fork** el repositorio
-2. **Clona** tu fork:
+1. **Fork** the repository
+2. **Clone** your fork:
    ```bash
-   git clone https://github.com/tu-usuario/impostor.git
+   git clone https://github.com/your-username/impostor.git
    ```
-3. **Crea una rama** para tu cambio:
+3. **Create a branch** for your change:
    ```bash
-   git checkout -b feature/mi-nueva-funcionalidad
+   git checkout -b feature/my-new-feature
    ```
-4. **Haz tus cambios** siguiendo las guías de estilo
-5. **Prueba** que todo funcione
-6. **Commit** con mensajes descriptivos:
+4. **Make your changes** following the style guides
+5. **Test** that everything works
+6. **Commit** with descriptive messages:
    ```bash
-   git commit -m "feat: añade sistema de chat en sala"
+   git commit -m "feat: add chat system in room"
    ```
-7. **Push** a tu fork:
+7. **Push** to your fork:
    ```bash
-   git push origin feature/mi-nueva-funcionalidad
+   git push origin feature/my-new-feature
    ```
-8. **Abre un Pull Request** describiendo tus cambios
+8. **Open a Pull Request** describing your changes
 
-## Guías de Estilo
+## Style Guides
 
-### Código
+### Code
 
-- Usa **TypeScript** para todo el código
-- Sigue la configuración de **ESLint** del proyecto
-- Usa **Prettier** para formateo (si está configurado)
-- Nombra variables y funciones en **inglés**
-- Comentarios pueden ser en español o inglés
+- Use **TypeScript** for all code
+- Follow the project's **ESLint** configuration
+- Use **Prettier** for formatting (if configured)
+- Name variables and functions in **English**
 
 ### Commits
 
-Seguimos [Conventional Commits](https://www.conventionalcommits.org/):
+We follow [Conventional Commits](https://www.conventionalcommits.org/):
 
-- `feat:` Nueva funcionalidad
-- `fix:` Corrección de bug
-- `docs:` Cambios en documentación
-- `style:` Cambios de formato (no afectan código)
-- `refactor:` Refactorización de código
-- `test:` Añadir o modificar tests
-- `chore:` Tareas de mantenimiento
+- `feat:` New feature
+- `fix:` Bug fix
+- `docs:` Documentation changes
+- `style:` Format changes (doesn't affect code)
+- `refactor:` Code refactoring
+- `test:` Add or modify tests
+- `chore:` Maintenance tasks
 
-Ejemplos:
+Examples:
 ```
-feat: añade temporizador a la fase de votación
-fix: corrige error al unirse a sala con código inválido
-docs: actualiza instrucciones de instalación
+feat: add timer to voting phase
+fix: correct error when joining room with invalid code
+docs: update installation instructions
 ```
 
 ### Pull Requests
 
-- Describe **qué** cambios hiciste y **por qué**
-- Referencia issues relacionados (`Closes #123`)
-- Incluye screenshots para cambios visuales
-- Asegúrate de que el CI pase
+- Describe **what** changes you made and **why**
+- Reference related issues (`Closes #123`)
+- Include screenshots for visual changes
+- Make sure CI passes
 
-## Áreas donde puedes ayudar
+## Areas Where You Can Help
 
-### Para principiantes
+### For Beginners
 
-- Mejorar documentación
-- Añadir más palabras al seed
-- Corregir typos
-- Mejorar accesibilidad
+- Improve documentation
+- Add more words to the seed
+- Fix typos
+- Improve accessibility
 
-### Para intermedios
+### For Intermediate
 
-- Añadir tests
-- Mejorar UI/UX
-- Optimizar rendimiento
-- Internacionalización (i18n)
+- Add tests
+- Improve UI/UX
+- Optimize performance
+- Internationalization (i18n)
 
-### Para avanzados
+### For Advanced
 
-- Sistema de empates con fase de defensa
-- WebSockets para tiempo real
-- Chat durante la partida
-- Sistema de estadísticas
+- Tiebreaker system with defense phase
+- WebSockets for real-time updates
+- Chat during the game
+- Statistics system
 
-## Desarrollo Local
+## Local Development
 
 ```bash
-# Instalar dependencias
+# Install dependencies
 npm install
 
-# Configurar BD
+# Configure database
 cp .env.example .env
-# Edita .env con tus credenciales
+# Edit .env with your credentials
 npm run db:push
 npm run db:seed
 
-# Iniciar desarrollo
+# Start development
 npm run dev
 ```
 
-## ¿Preguntas?
+## Questions?
 
-Si tienes dudas, no dudes en:
-- Abrir un issue con la etiqueta `question`
-- Comentar en un PR existente
+If you have any questions, feel free to:
+- Open an issue with the `question` label
+- Comment on an existing PR
 
-¡Gracias por contribuir! 🎉
+Thank you for contributing! 🎉

@@ -10,7 +10,7 @@
 
 **A real-time multiplayer game where one player is the impostor and doesn't know the secret word. Can you figure out who it is?**
 
-[Demo](#) · [Report Bug](../../issues) · [Request Feature](../../issues)
+[Demo](https://impostor.danilotoro.com) · [Report Bug](../../issues) · [Request Feature](../../issues)
 
 </div>
 
@@ -95,7 +95,7 @@
    AUTH_SECRET="generate-with-npx-auth-secret"
    AUTH_GOOGLE_ID="your-google-client-id"
    AUTH_GOOGLE_SECRET="your-google-client-secret"
-   NEXT_PUBLIC_APP_URL="http://localhost:3000"
+   NEXT_PUBLIC_APP_URL="http://localhost:3003"
    ```
 
 4. **Set up the database**
@@ -109,7 +109,7 @@
    npm run dev
    ```
 
-6. **Open** [http://localhost:3000](http://localhost:3000)
+6. **Open** [http://localhost:3003](http://localhost:3003)
 
 ---
 
@@ -121,8 +121,8 @@
 4. Go to **Credentials** > **Create Credentials** > **OAuth 2.0 Client ID**
 5. Configure:
    - Type: Web application
-   - Authorized origins: `http://localhost:3000`
-   - Redirect URIs: `http://localhost:3000/api/auth/callback/google`
+   - Authorized origins: `http://localhost:3003`
+   - Redirect URIs: `http://localhost:3003/api/auth/callback/google`
 6. Copy the Client ID and Client Secret to your `.env`
 
 ---

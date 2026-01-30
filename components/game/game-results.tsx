@@ -142,7 +142,9 @@ export function GameResults({ players, currentRound, hostId }: GameResultsProps)
                     <div className="flex items-center gap-2">
                       <span className="font-medium">{player.user.name ?? "Jugador"}</span>
                       {isHost && (
-                        <Crown className="size-4 text-yellow-500" title="Anfitrión" />
+                        <span title="Anfitrión" className="inline-flex">
+                          <Crown className="size-4 text-yellow-500" aria-hidden />
+                        </span>
                       )}
                       {isImpostor && (
                         <span className="rounded bg-red-500/20 px-1.5 py-0.5 text-xs font-medium text-red-600">
